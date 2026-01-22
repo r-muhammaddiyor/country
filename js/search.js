@@ -1,21 +1,23 @@
-import countries from './data.js';
-import { updateUi } from './uptade.js';
+// import { allCountries, ui } from './app.js';
+// import { search, region } from './html-elements.js';
 
-let elInput = document.querySelector('.input');
-let elSelect = document.querySelector('#region');
+// function filterCountries() {
+//   let searchValue = search.value.toLowerCase();
+//   let regionValue = region.value;
 
-elInput.addEventListener('input', (e) => {
-  let inputValue = e.target.value.trim();
-  let filterArr = countries.filter((item) => {
-    return item.name.toLowerCase().includes(inputValue.toLowerCase());
-  });
+//   let result = allCountries.filter((country) => {
+//     let name = country.name.common.toLowerCase();
+//     let capital = country.capital ? country.capital[0].toLowerCase() : '';
+//     let countryRegion = country.region;
 
-  updateUi(filterArr);
-});
+//     let searchMatch = name.includes(searchValue) || capital.includes(searchValue);
+//     let regionMatch = regionValue === '' || countryRegion === regionValue;
 
-elSelect.addEventListener('change', (e) => {
-  let res = e.target.value;
-  let filterArr = countries.filter((item) => item.region.toLowerCase() == res.toLowerCase());
+//     return searchMatch && regionMatch;
+//   });
 
-  updateUi(filterArr)
-});
+//   ui(result);
+// }
+
+// search.addEventListener('input', filterCountries);
+// region.addEventListener('change', filterCountries);

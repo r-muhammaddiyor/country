@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="default">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rest Countries</title>
-    <link rel="stylesheet" href="./css/main.css" />
-    <!-- fontawesome -->
+    <title>REST Countries</title>
+
+    <link rel="stylesheet" href="./css/output.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
@@ -14,50 +14,142 @@
       referrerpolicy="no-referrer"
     />
   </head>
-  <body class="body">
-    <header>
-      <div class="header__container container">
-        <h3 class="site__logo">
-          <a href="./index.html">Where in the world?</a>
-        </h3>
-        <div class="dark__mode"><i class="fa-solid fa-moon"></i> Dark Mode</div>
-        <div class="light__mode hidden">
-          <i class="fa-regular fa-sun"></i> Light Mode
+
+  <body class="min-h-screen flex flex-col">
+    <!-- GLOBAL CONTAINER -->
+    <div class="max-w-[1400px] w-full mx-auto px-4 flex flex-col min-h-screen">
+
+      <!-- HEADER -->
+      <header class="pt-6 pb-6">
+        <div class="flex justify-between items-center">
+          <h3 class="text-lg md:text-[24px] font-bold">
+            <a href="./index.html">Where in the world?</a>
+          </h3>
+
+          <div>
+            <button class="dark__mode cursor-pointer">🌙 Dark mode</button>
+            <button class="hidden light__mode cursor-pointer">☀️ Light mode</button>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
 
-    <!-- main -->
+      <!-- MAIN -->
+      <main class="flex-1 pt-6">
+        <div class="mb-12 p-5">
+          <div class="mb-5">
+            <label for="search" class="input w-full">
+              <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <g
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                  stroke-width="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.3-4.3"></path>
+                </g>
+              </svg>
+              <input type="search" id="search" required placeholder="Search" />
+            </label>
+          </div>
 
-    <main class="main">
-      <div class="input__wrap container">
-        <div class="search">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <input
-            class="input"
-            type="text"
-            placeholder="Search for a country…"
-          />
+          <select class="select" id="region">
+            <option disabled selected>Filter by Region</option>
+            <option value="Africa">Africa</option>
+            <option value="America">America</option>
+            <option value="Asia">Asia</option>
+            <option value="Europe">Europe</option>
+            <option value="Oceania">Oceania</option>
+          </select>
         </div>
 
-        <select name="" id="region">
-          <option value="Africa">Africa</option>
-          <option value="Americas">Americas</option>
-          <option value="Asia">Asia</option>
-          <option value="Europe">Europe</option>
-          <option value="Oceania">Oceania</option>
-        </select>
-      </div>
+        <!-- COUNTRIES -->
+        <ul
+          id="countriesContainer"
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10"
+        >
+          <template id="teplateCard">
+            <li
+              class="max-w-[264px] w-full rounded-[5px] bg-base-100 text-base-content shadow-md overflow-hidden mx-auto"
+            >
+              <img
+                id="teplateCardFlag"
+                class="w-full h-40 object-cover block rounded-t-[5px]"
+                src=""
+                alt=""
+              />
 
-      <ul class="countries container"></ul>
-    </main>
+              <div class="p-6">
+                <h2 id="teplateCardName" class="text-[18px] font-bold mb-4"></h2>
 
-  
+                <h3 class="text-[14px] mb-2 font-medium">
+                  Population:
+                  <span id="teplateCardPopulation" class="font-light"></span>
+                </h3>
+
+                <h3 class="text-[14px] mb-2 font-medium">
+                  Region:
+                  <span id="teplateCardRegion" class="font-light"></span>
+                </h3>
+
+                <h3 class="text-[14px] font-medium">
+                  Capital:
+                  <span id="teplateCardCapital" class="font-light"></span>
+                </h3>
+              </div>
+            </li>
+          </template>
+        </ul>
+      </main>
+
+      <!-- FOOTER -->
+      <footer class="mt-12">
+        <div class="pt-6 pb-6 flex justify-end items-center">
+          <div class="dropdown dropdown-end dropdown-top">
+            <button class="btn btn-sm md:btn-md gap-2 transition-all" id="themeToggle">
+              🎨 <span class="hidden sm:inline">Theme</span>
+            </button>
+
+            <ul
+              class="dropdown-content z-[1] w-72 p-3 bg-base-200 rounded-2xl shadow-2xl grid grid-cols-2 gap-2"
+            >
+              <li>
+                <button class="theme-btn btn btn-sm w-full justify-start gap-2" data-theme="default">
+                  <span class="w-3 h-3 rounded-full bg-neutral"></span> Default
+                </button>
+              </li>
+              <li>
+                <button class="theme-btn btn btn-sm w-full justify-start gap-2" data-theme="retro">
+                  <span class="w-3 h-3 rounded-full bg-warning"></span> Retro
+                </button>
+              </li>
+              <li>
+                <button class="theme-btn btn btn-sm w-full justify-start gap-2" data-theme="cyberpunk">
+                  <span class="w-3 h-3 rounded-full bg-primary"></span> Cyber
+                </button>
+              </li>
+              <li>
+                <button class="theme-btn btn btn-sm w-full justify-start gap-2" data-theme="valentine">
+                  <span class="w-3 h-3 rounded-full bg-secondary"></span> Love
+                </button>
+              </li>
+              <li class="col-span-2">
+                <button class="theme-btn btn btn-sm w-full justify-start gap-2" data-theme="aqua">
+                  <span class="w-3 h-3 rounded-full bg-info"></span> Aqua
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+
     </div>
 
+    <!-- SCRIPTS -->
     <script type="module" src="./js/mode.js"></script>
-    <script type="module" src="./js/uptade.js"></script>
     <script type="module" src="./js/search.js"></script>
+    <script type="module" src="./js/app.js"></script>
+    <script type="module" src="./js/html-elements.js"></script>
   </body>
 </html>
-  

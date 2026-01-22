@@ -1,0 +1,44 @@
+@import 'tailwindcss';
+
+@plugin "daisyui";
+
+@plugin "daisyui/theme" {
+  name: 'default';
+}
+@plugin "daisyui/theme" {
+  name: 'retro';
+}
+@plugin "daisyui/theme" {
+  name: 'cyberpunk';
+}
+@plugin "daisyui/theme" {
+  name: 'valentine';
+}
+@plugin "daisyui/theme" {
+  name: 'aqua';
+}
+
+/* nice animation */
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade {
+  animation: fade 0.15s ease-out;
+}
+@plugin "daisyui/theme" {
+  name: 'light';
+}
+@plugin "daisyui/theme" {
+  name: 'dark';
+}
+
+/* DARK MODE STRATEGIYASI */
+@custom-variant dark (&:where(.dark, .dark *));
