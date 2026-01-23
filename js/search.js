@@ -1,23 +1,37 @@
-// import { allCountries, ui } from './app.js';
-// import { search, region } from './html-elements.js';
+import { allCountries, ui } from './app.js';
+import { search, region, searchNull } from './html-elements.js';
 
-// function filterCountries() {
-//   let searchValue = search.value.toLowerCase();
-//   let regionValue = region.value;
+search.addEventListener('input', () => {
+  let value = search.value.toLowerCase();
 
-//   let result = allCountries.filter((country) => {
-//     let name = country.name.common.toLowerCase();
-//     let capital = country.capital ? country.capital[0].toLowerCase() : '';
-//     let countryRegion = country.region;
+  let result = allCountries.filter((country) => {
+    let name = country.name?.common?.toLowerCase() || '';
+    let capital = country.capital?.[0]?.toLowerCase() || '';
 
-//     let searchMatch = name.includes(searchValue) || capital.includes(searchValue);
-//     let regionMatch = regionValue === '' || countryRegion === regionValue;
+    return name.includes(value) || capital.includes(value);
+  });
 
-//     return searchMatch && regionMatch;
-//   });
+  if (result.length === 0) {
+    searchNull.classList.remove('hidden');
+    ui([]);
+  } else {
+    searchNull.classList.add('hidden');
+    ui(result);
+  }
+});
 
-//   ui(result);
-// }
+region.addEventListener('change', () => {
+  let regionValue = region.value;
 
-// search.addEventListener('input', filterCountries);
-// region.addEventListener('change', filterCountries);
+  let result = allCountries.filter((country) => {
+    return country.region === regionValue;
+  });
+
+  if (result.length === 0) {
+    searchNull.classList.remove('hidden');
+    ui([]);
+  } else {
+    searchNull.classList.add('hidden');
+    ui(result);
+  }
+});
