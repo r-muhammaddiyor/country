@@ -1,4 +1,4 @@
-import { countriesContainer, teplateCard, infoButton, skeletonContainer, } from './html-elements.js';
+import { countriesContainer, teplateCard, infoButton, skeletonContainer } from './html-elements.js';
 
 export let allCountries = [];
 
@@ -10,8 +10,10 @@ function request() {
     .then((res) => res.json())
     .then((res) => {
       allCountries = res;
-      skeletonContainer.classList.add('hidden');
       ui(allCountries);
+    })
+    .finally(() => {
+      skeletonContainer.classList.add('hidden');
     });
 }
 
